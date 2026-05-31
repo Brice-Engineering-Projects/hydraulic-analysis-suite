@@ -8,7 +8,10 @@ src/
 │
 ├── equations/
 │   ├── hazen_williams.py
-│   └── darcy_weisbach.py
+│   ├── darcy_weisbach.py
+│   ├── manning.py
+│   ├── minor_losses.py
+│   └── system_curve.py
 │
 ├── calculators/
 │   └── friction_loss_calculator.py
