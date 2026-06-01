@@ -1,4 +1,4 @@
-# Hydraulic Calculator
+# Hydraulic Analysis Suite
 
 ![Python](https://img.shields.io/badge/Python-3.13+-blue.svg)
 ![uv](https://img.shields.io/badge/package%20manager-uv-purple.svg)
@@ -6,9 +6,16 @@
 ![Status](https://img.shields.io/badge/status-In%20Development-yellow.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-A Python-based engineering calculator for analyzing friction losses and hydraulic behavior in pressurized pipe systems. The project implements common water and wastewater design equations, including Hazen-Williams and Darcy-Weisbach, and is being developed as part of a broader study of lift station and force main hydraulics.
+A Python-based hydraulic engineering analysis platform for modeling and evaluating pressurized pipe systems, force mains, lift stations, and pumping infrastructure.
 
-The project serves as both a software development exercise and an engineering learning tool, focusing on common hydraulic calculations used in force main design, lift station design, and pump system analysis.
+The project began as a learning exercise focused on friction loss calculations and is evolving into a broader engineering toolkit that combines hydraulic analysis, software development, and infrastructure engineering concepts.
+
+The long-term goal is to create a modular suite of reusable tools capable of supporting common water and wastewater engineering workflows, including pipe hydraulics, total dynamic head calculations, pump system analysis, wet well sizing, force main evaluation, and lift station design studies.
+
+This project serves two primary purposes:
+
+* Strengthen understanding of hydraulic engineering and pump station design.
+* Develop professional software engineering skills through the implementation of real-world engineering workflows.
 
 ---
 
@@ -16,17 +23,39 @@ The project serves as both a software development exercise and an engineering le
 
 This project is being developed incrementally to:
 
-* Strengthen understanding of hydraulic engineering concepts.
-* Reinforce Python software development skills.
-* Create reusable engineering calculation tools.
-* Explore pump system behavior through computational methods.
-* Build a foundation for future infrastructure analytics applications.
+* Strengthen understanding of water and wastewater hydraulic systems.
+* Reinforce Python software engineering practices.
+* Model real-world hydraulic infrastructure using object-oriented design.
+* Build reusable engineering analysis tools.
+* Explore computational approaches to pump system design and evaluation.
+* Create a foundation for future infrastructure analytics applications.
+* Develop a portfolio-quality engineering software project.
+
+---
+
+## Design Philosophy
+
+The Hydraulic Analysis Suite is organized around engineering components rather than individual equations.
+
+Examples include:
+
+* Pipe
+* Pump
+* Force Main
+* Wet Well
+* Fittings
+
+Engineering calculations are implemented as independent computational modules that operate on these system components.
+
+This approach allows the project to grow from simple friction loss calculations into more advanced hydraulic analyses while maintaining a clean and scalable software architecture.
+
+The intent is to model infrastructure systems, not simply perform isolated calculations.
 
 ---
 
 ## Current Features
 
-### Version 1
+### Version 1 - Core Pipe Hydraulics
 
 * Hazen-Williams headloss calculations
 * Velocity calculations
@@ -37,40 +66,50 @@ This project is being developed incrementally to:
 
 ## Planned Roadmap
 
-### Version 2
+### Version 2 - Material Libraries & Validation
 
 * Pipe material library
 * Automatic Hazen-Williams C-factor selection
 * Input validation
+* Engineering validation checks
 
-### Version 3
+### Version 3 - Total Dynamic Head Analysis
 
-* Total Dynamic Head (TDH) calculations
-* Static head inputs
+* Static head calculations
 * Minor loss calculations
+* Total Dynamic Head (TDH) calculations
 
-### Version 4
+### Version 4 - Force Main & Lift Station Analysis
 
-* Lift station hydraulic calculator
+* Force main hydraulic analysis
 * Valve and fitting loss estimation
-* Expanded force main analysis
+* Lift station hydraulic calculations
+* Expanded wastewater design workflows
 
-### Version 5
+### Version 5 - Pump System Analysis
 
 * Pump curve integration
 * System curve generation
 * Operating point determination
 * CSV-based pump data import
 
-### Future Enhancements
+### Version 6 - Hydraulic System Modeling
 
 * Multi-segment pipelines
 * Parallel force mains
+* Advanced hydraulic workflows
+* Infrastructure system modeling
+
+### Future Enhancements
+
 * Wet well storage calculations
 * Pump cycling analysis
+* Generator sizing
 * Report generation
 * Streamlit interface
+* Scenario analysis
 * Infrastructure planning modules
+* Asset management integrations
 
 ---
 
@@ -78,6 +117,7 @@ This project is being developed incrementally to:
 
 * Hazen-Williams Equation
 * Darcy-Weisbach Equation
+* Manning Equation
 * Velocity Calculations
 * Friction Headloss
 * Minor Losses
@@ -86,31 +126,28 @@ This project is being developed incrementally to:
 * System Curves
 * Force Main Design
 * Lift Station Hydraulics
+* Wet Well Analysis
+* Pump System Evaluation
 
 ---
 
-## Project Structure
+## Documentation
+
+Project documentation is organized within the `docs/` directory.
+
+Key project documentation includes:
+
+* Project Overview
+* Architecture and Design Decisions
+* Development Strategy
+* Engineering Notes
+* Reference Material
+* Future Roadmap
+
+For the current project structure, see:
 
 ```text
-hydraulic_calculator/
-│
-├── docs/
-│   ├── project_plan.md
-│   ├── engineering_notes.md
-│   └── references.md
-│
-├── src/
-│   └── hydraulic_calculator/
-│
-├── tests/
-│
-├── data/
-│
-├── pyproject.toml
-│
-├── uv.lock
-│
-└── README.md
+docs/01_structure/00_project_structure.md
 ```
 
 ---
@@ -121,7 +158,7 @@ hydraulic_calculator/
 
 ```bash
 git clone <repository-url>
-cd hydraulic_calculator
+cd hydraulic-analysis-suite
 ```
 
 ### Create Virtual Environment
@@ -155,7 +192,7 @@ uv sync
 ## Running the Application
 
 ```bash
-python -m hydraulic_calculator
+python main.py
 ```
 
 ---
@@ -198,8 +235,11 @@ All calculations implemented in this project should be verified against:
 * Hand calculations
 * Spreadsheet calculations
 * Manufacturer data where applicable
+* Independent engineering checks when possible
 
 The software is intended as an educational and engineering support tool and should not replace professional engineering judgment.
+
+Users are responsible for verifying all calculations prior to design, construction, procurement, permitting, or operational decision-making.
 
 ---
 
@@ -212,6 +252,7 @@ Primary references include:
 * AWWA Publications
 * Ten States Standards
 * Utility Design Manuals and Technical Specifications
+* Manufacturer Pump Curves and Technical Literature
 
 ---
 
@@ -225,6 +266,15 @@ MIT License
 
 Brice Nelson
 
-Civil Engineer | Infrastructure Analytics | Python Developer
+**Civil Engineer | Infrastructure Analytics | Python Developer**
 
 Focused on the intersection of infrastructure engineering, hydraulic systems, data analytics, and software development.
+
+Areas of interest include:
+
+* Water and wastewater infrastructure
+* Lift station and force main design
+* Hydraulic modeling
+* Infrastructure analytics
+* Applied machine learning
+* Engineering software development
