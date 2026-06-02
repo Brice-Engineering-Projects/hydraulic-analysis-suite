@@ -1,5 +1,5 @@
 """
-Contains the Pipes class used to obtain and store
+Contains the Pipe class used to obtain and store
 pipe system information from user inputs to be used to calculate
 hydraulic analysis.
 
@@ -64,21 +64,6 @@ class Pipe:
 
         c_factor : float
             Hazen-Williams roughness coefficient.
-        """
-
-    def collect_pipe_data(self, flow_rate, diameter, length, pipe_material):
-        """
-        Collect pipe data from user input.
-
-        Returns
-        -------
-        float
-            flow_rate (cfs).
-            diameter (in).
-            length (ft).
-
-        str
-            pipe_material (str).
 
         Raises
         ------
@@ -87,7 +72,25 @@ class Pipe:
             If flow_rate is less than or equal to zero.
             If length is less than or equal to zero.
 
-        Notes
-        -----
-        Uses pipe_material to fetch the c_factor from data stored in a db (dictionary).
         """
+        self._validate_data(
+            flow_rate,
+            diameter,
+            length
+        )
+        self.flow_rate = flow_rate
+        self.diameter = diameter
+        self.length = length
+        self.c_factor = c_factor
+        self.pipe_material = pipe_material
+
+    def _validate_data(self, flow_rate, diameter, length):
+        """Validate the engineering data passed."""
+        if diameter <= 0:
+            raise ValueError("Diameter must be greater than zero.")
+
+        if flow_rate <= 0:
+            raise ValueError("Flow rate must be greater than zero.")
+
+        if length <= 0:
+            raise ValueError("Length must be greater than zero.")
