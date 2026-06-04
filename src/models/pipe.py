@@ -71,12 +71,14 @@ class Pipe:
             If diameter is less than or equal to zero.
             If flow_rate is less than or equal to zero.
             If length is less than or equal to zero.
+            If c_factor is less than or equal to zero.
 
         """
         self._validate_data(
             flow_rate,
             diameter,
-            length
+            length,
+            c_factor
         )
         self.flow_rate = flow_rate
         self.diameter = diameter
@@ -84,13 +86,13 @@ class Pipe:
         self.c_factor = c_factor
         self.pipe_material = pipe_material
 
-    def _validate_data(self, flow_rate, diameter, length):
+    def _validate_data(self, flow_rate, diameter, length, c_factor):
         """Validate the engineering data passed."""
         if diameter <= 0:
             raise ValueError("Diameter must be greater than zero.")
-
         if flow_rate <= 0:
             raise ValueError("Flow rate must be greater than zero.")
-
         if length <= 0:
             raise ValueError("Length must be greater than zero.")
+        if c_factor <= 0:
+            raise ValueError("C Factor must be greater than zero.")
