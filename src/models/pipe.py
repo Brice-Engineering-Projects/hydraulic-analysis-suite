@@ -75,11 +75,47 @@ class Pipe:
         self.length = length
         self.pipe_material = pipe_material
 
-    def __repr__(self):
-        return f"Pipe(flow_rate={self.flow_rate}, diameter={self.diameter}, length={self.length}, pipe_material='{self.pipe_material}')"
+    def __str__(self) -> str:
+        """
+        Return a human-readable description of the Pipe object.
 
-    def __str__(self):
-        return f"Pipe: {self.pipe_material} with diameter {self.diameter} inches, length {self.length} feet"
+        Returns
+        -------
+        str
+            Formatted description of the pipe characteristics.
+
+        Notes
+        -----
+        Intended for display to users and general reporting
+        purposes.
+        """
+        return (
+            f"Pipe: {self.pipe_material} "
+            f"with diameter {self.diameter} inches "
+            f"and length {self.length} feet"
+        )
+
+    def __repr__(self) -> str:
+        """
+        Return an unambiguous string representation of the Pipe object.
+
+        Returns
+        -------
+        str
+            String representation of the Pipe instance suitable
+            for debugging and development purposes.
+
+        Notes
+        -----
+        The representation includes the primary pipe attributes
+        used to define the pipe object.
+        """
+        return (
+            f"Pipe(flow_rate={self.flow_rate}, "
+            f"diameter={self.diameter}, "
+            f"length={self.length}, "
+            f"pipe_material='{self.pipe_material}')"
+        )
 
     def _validate_data(self, flow_rate, diameter, length, pipe_material) -> None:
         """Validate the engineering data passed."""
