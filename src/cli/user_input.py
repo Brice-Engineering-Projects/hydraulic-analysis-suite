@@ -34,6 +34,6 @@ class UserInput:
 
         Notes
         -----
-        Uses pipe_material to fetch the c_factor from data stored in a db (dictionary).
+        Uses pipe_material to fetch the c_factor from data stored in a data (dictionary).
         """
         pass

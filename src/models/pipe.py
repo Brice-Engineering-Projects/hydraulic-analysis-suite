@@ -128,3 +128,27 @@ class Pipe:
         if not pipe_material.strip():
             raise ValueError("Pipe material cannot be empty")
 
+    def _lookup_pipe_material(self, pipe_material: str, c_factor: float) -> str:
+        """Lookup the pipe material and return a standardized name."""
+        material_mapping = {
+            "steel": "Steel",
+            "aluminum": "Aluminum",
+            "plastic": "Plastic",
+            "copper": "Copper",
+            "pvc": "PVC",
+            "hdpe": "HDPE",
+            "dip_aged": "DIP_AGED",
+            "dip_new": "DIP_NEW",
+            "concrete": "Concrete",
+            "cast_iron": "Cast_Iron",
+            "galvanized": "Galvanized",
+            "brass": "Brass",
+            "bronze": "Bronze",
+            "stainless_steel": "Stainless Steel",
+            "other": "Other",
+        }
+        self.pipe_material = pipe_material
+        self.c_factor = c_factor
+        pipe_material = pipe_material.replace(" ", "_")
+
+        return material_mapping.get(pipe_material.lower(), "Unknown")
