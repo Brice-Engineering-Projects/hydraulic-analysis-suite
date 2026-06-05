@@ -26,10 +26,7 @@ class Pipe:
     length : float
         Pipe length (ft).
 
-    c_factor : float
-        Hazen-Williams roughness coefficient.
-
-    material : string
+    pipe_material : string
         user defined pipe material.
 
     Notes
@@ -42,7 +39,6 @@ class Pipe:
                  flow_rate: float,
                  diameter: float,
                  length: float,
-                 c_factor: float,
                  pipe_material: str
                  ) -> None:
         """
@@ -62,31 +58,30 @@ class Pipe:
         pipe_material : str
             Identify pipe material
 
-        c_factor : float
-            Hazen-Williams roughness coefficient.
-
         Raises
         ------
         ValueError
             If diameter is less than or equal to zero.
             If flow_rate is less than or equal to zero.
             If length is less than or equal to zero.
-            If c_factor is less than or equal to zero.
-
         """
         self._validate_data(
             flow_rate,
             diameter,
             length,
-            c_factor
         )
         self.flow_rate = flow_rate
         self.diameter = diameter
         self.length = length
-        self.c_factor = c_factor
         self.pipe_material = pipe_material
 
-    def _validate_data(self, flow_rate, diameter, length, c_factor):
+    def __repr__(self):
+        return f"Pipe(flow_rate={self.flow_rate}, diameter={self.diameter}, length={self.length}, pipe_material='{self.pipe_material}')"
+
+    def __str__(self):
+        return f"Pipe: {self.pipe_material} with diameter {self.diameter} inches, length {self.length} feet"
+
+    def _validate_data(self, flow_rate, diameter, length, pipe_material) -> None:
         """Validate the engineering data passed."""
         if diameter <= 0:
             raise ValueError("Diameter must be greater than zero.")
@@ -94,5 +89,6 @@ class Pipe:
             raise ValueError("Flow rate must be greater than zero.")
         if length <= 0:
             raise ValueError("Length must be greater than zero.")
-        if c_factor <= 0:
-            raise ValueError("C Factor must be greater than zero.")
+        if not pipe_material.strip():
+            raise ValueError("Pipe material cannot be empty")
+
