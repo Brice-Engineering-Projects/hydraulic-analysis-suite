@@ -71,11 +71,13 @@ class Pipe:
             flow_rate,
             diameter,
             length,
+            pipe_material,
         )
         self.flow_rate = flow_rate
         self.diameter = diameter
         self.length = length
         self.pipe_material = pipe_material
+        self._lookup_pipe_material()
 
     def __str__(self) -> str:
         """
@@ -129,11 +131,29 @@ class Pipe:
             raise ValueError("Length must be greater than zero.")
         if not pipe_material.strip():
             raise ValueError("Pipe material cannot be empty")
+        if not pipe_material:
+            raise ValueError("Pipe material cannot be empty.")
 
-    def _lookup_pipe_material(self, pipe_material: str, c_factor: float) -> str:
-        """Lookup the pipe material and return the pipe material data."""
-        self.pipe_material = pipe_material
-        self.c_factor = c_factor
-        
-        pass
+        if pipe_material not in PIPE_MATERIALS:
+            raise ValueError(
+                f"Pipe material '{pipe_material}' not found."
+            )
 
+    def _lookup_pipe_material(self) -> None:
+        """
+        Retrieve hydraulic properties associated with
+        the selected pipe material and store them on
+        the Pipe object.
+
+        Raises
+        ------
+        ValueError
+            If pipe material is empty.
+            If pipe material is not found in the
+            pipe material database.
+        """
+        pipe_material_data = PIPE_MATERIALS[self.pipe_material]
+
+        self.c_factor = pipe_material_data["c_factor"]
+        self.roughness_ft = pipe_material_data["roughness_ft"]
+        self.manning_n = pipe_material_data["manning_n"]
