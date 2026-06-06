@@ -68,6 +68,14 @@ PIPE_MATERIALS = {
     }
 }
 ```
+### Cast Iron Pipe (CIP) Condition Table
+
+| Condition | Typical Age Range |
+| --------- | ----------------- |
+| Excellent | 0-10 years        |
+| Good      | 10-25 years       |
+| Fair      | 25-50 years       |
+| Poor      | 50+ years         |
 
 ---
 
