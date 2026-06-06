@@ -57,7 +57,7 @@ PIPE_MATERIALS = {
     "concrete_sewer": {
         "material_name": "Concrete Sewer",
         "application": "gravity",
-        "category": "masonry",
+        "category": "concrete",
         "c_factor": 120,
         "roughness_ft": 0.0010,
         "manning_n": 0.013,
@@ -66,27 +66,19 @@ PIPE_MATERIALS = {
     "concrete_sewer_aged": {
         "material_name": "Concrete Sewer (Aged)",
         "application": "gravity",
-        "category": "masonry",
+        "category": "concrete",
         "c_factor": 100,
         "roughness_ft": 0.0030,
         "manning_n": 0.015,
     },
 
-    "corrugated_metal_pipe": {
-        "material_name": "Corrugated Metal Pipe",
-        "application": "gravity",
-        "category": "masonry",
-        "c_factor": 60,
-        "roughness_ft": 0.0080,
-        "manning_n": 0.024,
-    },
 
     # ====================================================
     # Concrete Pipe Materials
     # ====================================================
 
     "rcp": {
-        "material_name": "Reinforced Concrete Pipe",
+        "material_name": "RCP",
         "application": "gravity",
         "category": "concrete",
         "c_factor": 120,
@@ -97,7 +89,7 @@ PIPE_MATERIALS = {
     "concrete": {
         "material_name": "Concrete",
         "application": "gravity",
-        "category": "masonry",
+        "category": "concrete",
         "c_factor": 120,
         "roughness_ft": 0.0010,
         "manning_n": 0.013,
@@ -123,7 +115,7 @@ PIPE_MATERIALS = {
     "asbestos_cement_new": {
         "material_name": "Asbestos Cement (New)",
         "application": "pressure",
-        "category": "masonry",
+        "category": "abestos_cement",
         "c_factor": 140,
         "roughness_ft": 0.00030,
         "manning_n": 0.011,
@@ -132,7 +124,7 @@ PIPE_MATERIALS = {
     "asbestos_cement_aged": {
         "material_name": "Asbestos Cement (Aged)",
         "application": "pressure",
-        "category": "masonry",
+        "category": "abestos_cement",
         "c_factor": 130,
         "roughness_ft": 0.00050,
         "manning_n": 0.012,
@@ -141,7 +133,7 @@ PIPE_MATERIALS = {
     "asbestos_cement_old": {
         "material_name": "Asbestos Cement (Old)",
         "application": "pressure",
-        "category": "masonry",
+        "category": "abestos_cement",
         "c_factor": 120,
         "roughness_ft": 0.00100,
         "manning_n": 0.013,
@@ -289,6 +281,15 @@ PIPE_MATERIALS = {
     # ====================================================
     # Metal Pipe Materials
     # ====================================================
+
+    "corrugated_metal_pipe": {
+        "material_name": "Corrugated Metal Pipe",
+        "application": "gravity",
+        "category": "metal",
+        "c_factor": 60,
+        "roughness_ft": 0.0080,
+        "manning_n": 0.024,
+    },
 
     "steel": {
         "material_name": "Steel",
