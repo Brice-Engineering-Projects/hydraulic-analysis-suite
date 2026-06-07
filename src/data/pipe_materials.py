@@ -165,22 +165,40 @@ PIPE_MATERIALS = {
     # Ductile Iron Pipe Materials
     # ====================================================
 
-    "dip_new": {
-        "material_name": "New Ductile Iron Pipe",
+    "dip_excellent": {
+        "material_name": "Ductile Iron Pipe (Excellent)",
         "application": "pressure",
         "category": "ductile_iron",
         "c_factor": 140,
         "roughness_ft": 0.00085,
-        "manning_n": 0.012,
+        "manning_n": 0.013,
     },
 
-    "dip_aged": {
-        "material_name": "Aged Ductile Iron Pipe",
+    "dip_good": {
+        "material_name": "Ductile Iron Pipe (Good)",
+        "application": "pressure",
+        "category": "ductile_iron",
+        "c_factor": 130,
+        "roughness_ft": 0.00100,
+        "manning_n": 0.015,
+    },
+
+    "dip_fair": {
+        "material_name": "Ductile Iron Pipe (Fair)",
+        "application": "pressure",
+        "category": "ductile_iron",
+        "c_factor": 115,
+        "roughness_ft": 0.00150,
+        "manning_n": 0.020,
+    },
+
+    "dip_poor": {
+        "material_name": "Ductile Iron Pipe (Poor)",
         "application": "pressure",
         "category": "ductile_iron",
         "c_factor": 100,
-        "roughness_ft": 0.0020,
-        "manning_n": 0.014,
+        "roughness_ft": 0.00300,
+        "manning_n": 0.030,
     },
 
     # ==================================================================
