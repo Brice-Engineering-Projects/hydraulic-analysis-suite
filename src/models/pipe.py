@@ -11,6 +11,7 @@ AWWA Manuals
 """
 
 from src.data.pipe_materials import PIPE_MATERIALS
+import math
 
 class Pipe:
     """
@@ -38,9 +39,9 @@ class Pipe:
     """
 
     def __init__(self,
-                 flow_rate: float,
-                 diameter: float,
-                 length: float,
+                 flow_rate_gpm: float,
+                 diameter_in: float,
+                 length_ft: float,
                  pipe_material: str
                  ) -> None:
         """
@@ -48,13 +49,13 @@ class Pipe:
 
         Parameters
         ----------
-        flow_rate : float
+        flow_rate_gpm : float
             Flow rate (gpm).
 
-        diameter : float
+        diameter_in : float
             Pipe diameter (in).
 
-        length : float
+        length_ft : float
             Pipe length (ft).
 
         pipe_material : str
@@ -68,14 +69,14 @@ class Pipe:
             If length is less than or equal to zero.
         """
         self._validate_data(
-            flow_rate,
-            diameter,
-            length,
+            flow_rate_gpm,
+            diameter_in,
+            length_ft,
             pipe_material,
         )
-        self.flow_rate = flow_rate
-        self.diameter = diameter
-        self.length = length
+        self.flow_rate_gpm = flow_rate_gpm
+        self.diameter_in = diameter_in
+        self.length_ft = length_ft
         self.pipe_material = pipe_material
         self._lookup_pipe_material()
 
@@ -95,8 +96,8 @@ class Pipe:
         """
         return (
             f"Pipe: {self.pipe_material} "
-            f"with diameter {self.diameter} inches "
-            f"and length {self.length} feet"
+            f"with diameter {self.diameter_in} inches "
+            f"and length {self.length_ft} feet"
         )
 
     def __repr__(self) -> str:
@@ -115,13 +116,13 @@ class Pipe:
         used to define the pipe object.
         """
         return (
-            f"Pipe(flow_rate={self.flow_rate}, "
-            f"diameter={self.diameter}, "
-            f"length={self.length}, "
+            f"Pipe(flow_rate={self.flow_rate_gpm}, "
+            f"diameter={self.diameter_in}, "
+            f"length={self.length_ft}, "
             f"pipe_material='{self.pipe_material}')"
         )
 
-    def _validate_data(self, flow_rate, diameter, length, pipe_material) -> None:
+    def _validate_data(self, flow_rate_gpm, diameter_in, length_ft, pipe_material) -> None:
         """
         Validate the engineering data passed.
 
@@ -134,11 +135,11 @@ class Pipe:
             If pipe material is empty.
             If pipe material is not found in the pipe material database.
         """
-        if diameter <= 0:
+        if diameter_in <= 0:
             raise ValueError("Diameter must be greater than zero.")
-        if flow_rate <= 0:
+        if flow_rate_gpm <= 0:
             raise ValueError("Flow rate must be greater than zero.")
-        if length <= 0:
+        if length_ft <= 0:
             raise ValueError("Length must be greater than zero.")
         if not pipe_material.strip():
             raise ValueError("Pipe material cannot be empty")
@@ -160,3 +161,56 @@ class Pipe:
         self.c_factor = pipe_material_data["c_factor"]
         self.roughness_ft = pipe_material_data["roughness_ft"]
         self.manning_n = pipe_material_data["manning_n"]
+
+    def derived_properties(self) -> None:
+        """Generates derived properties for the pipe."""
+        self.diameter_ft = self.diameter_in / 12
+        self.length_miles = self.length_ft / 5280
+        self.radius_in = self.diameter_in / 2
+
+    def summary(self) -> dict:
+        """
+        Generate a summary of the pipe's attributes and hydraulic properties.
+
+        Returns
+        -------
+        dict
+            A dictionary containing the pipe's attributes and hydraulic properties.
+        """
+
+        physical_properties ={
+            'flow_rate_gpm': self.flow_rate_gpm,
+            'diameter_in': self.diameter_in,
+            'length_ft': self.length_ft,
+            'pipe_material': self.pipe_material,
+        }
+        hydraulic_properties = {
+            'c_factor': self.c_factor,
+            'roughness_ft': self.roughness_ft,
+            'manning_n': self.manning_n
+        }
+        derived_properties = {
+            'diameter_ft': self.diameter_ft,
+            'length_miles': self.length_miles,
+            'radius_in': self.radius_in,
+            'area_sf': self.area_sf,
+            'volume_cf': self.volume_cf,
+        }
+        summary_results = {
+            'physical_properties': physical_properties,
+            'hydraulic_properties': hydraulic_properties,
+            'derived_properties': derived_properties
+        }
+        return summary_results
+
+    @property
+    def area_sf(self) -> float:
+        """calculates the cross-sectional area of the pipe."""
+        area = math.pi * self.diameter_ft**2 / 4
+        return area
+
+    @property
+    def volume_cf(self) -> float:
+        """Calculates the volume of the pipe."""
+        volume = math.pi * self.length_ft * self.diameter_ft**2 / 4
+        return volume
