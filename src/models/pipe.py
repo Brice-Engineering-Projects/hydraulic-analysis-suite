@@ -122,7 +122,18 @@ class Pipe:
         )
 
     def _validate_data(self, flow_rate, diameter, length, pipe_material) -> None:
-        """Validate the engineering data passed."""
+        """
+        Validate the engineering data passed.
+
+        Raises
+        ------
+        ValueError
+            If pipe diameter is less than zero.
+            If flow rate is less than zero.
+            If length is less than zero.
+            If pipe material is empty.
+            If pipe material is not found in the pipe material database.
+        """
         if diameter <= 0:
             raise ValueError("Diameter must be greater than zero.")
         if flow_rate <= 0:
@@ -133,7 +144,6 @@ class Pipe:
             raise ValueError("Pipe material cannot be empty")
         if not pipe_material:
             raise ValueError("Pipe material cannot be empty.")
-
         if pipe_material not in PIPE_MATERIALS:
             raise ValueError(
                 f"Pipe material '{pipe_material}' not found."
@@ -144,13 +154,6 @@ class Pipe:
         Retrieve hydraulic properties associated with
         the selected pipe material and store them on
         the Pipe object.
-
-        Raises
-        ------
-        ValueError
-            If pipe material is empty.
-            If pipe material is not found in the
-            pipe material database.
         """
         pipe_material_data = PIPE_MATERIALS[self.pipe_material]
 
