@@ -14,6 +14,7 @@ from src.data.pipe_materials import PIPE_MATERIALS
 from src.data import constants
 import math
 
+
 class Pipe:
     """
     Contains characteristics for a pipe system to be used in
@@ -125,10 +126,10 @@ class Pipe:
 
     def _validate_data(
             self,
-            flow_rate_gpm,
-            diameter_in,
-            length_ft,
-            pipe_material
+            flow_rate_gpm:float,
+            diameter_in:float,
+            length_ft:float,
+            pipe_material:str
     ) -> None:
         """
         Validate the engineering data passed.
@@ -142,13 +143,15 @@ class Pipe:
             If pipe material is empty.
             If pipe material is not found in the pipe material database.
         """
+        pipe_material = pipe_material.lower().strip()
+
         if diameter_in <= 0:
             raise ValueError("Diameter must be greater than zero.")
         if flow_rate_gpm <= 0:
             raise ValueError("Flow rate must be greater than zero.")
         if length_ft <= 0:
             raise ValueError("Length must be greater than zero.")
-        if not pipe_material.strip():
+        if not pipe_material:
             raise ValueError("Pipe material cannot be empty")
         if pipe_material not in PIPE_MATERIALS:
             raise ValueError(
@@ -163,6 +166,9 @@ class Pipe:
         """
         pipe_material_data = PIPE_MATERIALS[self.pipe_material]
 
+        self.material_name = pipe_material_data["material_name"]
+        self.application = pipe_material_data["application"]
+        self.category = pipe_material_data["category"]
         self.c_factor = pipe_material_data["c_factor"]
         self.roughness_ft = pipe_material_data["roughness_ft"]
         self.manning_n = pipe_material_data["manning_n"]
@@ -176,6 +182,12 @@ class Pipe:
         dict
             A dictionary containing the pipe's attributes and hydraulic properties.
         """
+
+        general_data ={
+            'material_name': self.material_name,
+            'application': self.application,
+            'category': self.category,
+        }
 
         physical_properties ={
             'flow_rate_gpm': self.flow_rate_gpm,
@@ -197,12 +209,13 @@ class Pipe:
             'flow_rate_cfs': self.flow_rate_cfs,
             'velocity_fps': self.velocity_fps,
         }
-        summary_properties = {
+        summary_data = {
+            'general_data': general_data,
             'physical_properties': physical_properties,
             'hydraulic_properties': hydraulic_properties,
             'derived_properties': derived_properties
         }
-        return summary_properties
+        return summary_data
 
     @property
     def radius_in(self) -> float:

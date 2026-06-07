@@ -78,7 +78,7 @@ PIPE_MATERIALS = {
     # ====================================================
 
     "rcp": {
-        "material_name": "RCP",
+        "material_name": "Reinforced Concrete Pipe",
         "application": "gravity",
         "category": "concrete",
         "c_factor": 120,
@@ -100,7 +100,7 @@ PIPE_MATERIALS = {
     # ====================================================
 
     "abs": {
-        "material_name": "ABS",
+        "material_name": "Acrylonitrile Butadiene Styrene (ABS)",
         "application": "gravity",
         "category": "plastic",
         "c_factor": 140,
@@ -144,7 +144,7 @@ PIPE_MATERIALS = {
     # ====================================================
 
     "pvc": {
-        "material_name": "PVC",
+        "material_name": "Polyvinyl Chloride (PVC)",
         "application": "both",
         "category": "plastic",
         "c_factor": 150,
@@ -153,7 +153,7 @@ PIPE_MATERIALS = {
     },
 
     "hdpe": {
-        "material_name": "HDPE",
+        "material_name": "High-Density Polyethylene (HDPE)",
         "application": "both",
         "category": "plastic",
         "c_factor": 150,
@@ -166,7 +166,7 @@ PIPE_MATERIALS = {
     # ====================================================
 
     "dip_new": {
-        "material_name": "DIP_NEW",
+        "material_name": "New Ductile Iron Pipe",
         "application": "pressure",
         "category": "ductile_iron",
         "c_factor": 140,
@@ -175,7 +175,7 @@ PIPE_MATERIALS = {
     },
 
     "dip_aged": {
-        "material_name": "DIP_AGED",
+        "material_name": "Aged Ductile Iron Pipe",
         "application": "pressure",
         "category": "ductile_iron",
         "c_factor": 100,

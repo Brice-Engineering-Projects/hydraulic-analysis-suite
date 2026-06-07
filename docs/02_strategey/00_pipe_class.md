@@ -58,7 +58,7 @@ Manning n: 0.009
 - manning_n
 - wall_thickness_in (FUTURE ATTRIBUTE)
 
-## Pipe Class Derived Attributes
+## Pipe Class Derived Properties
 
 - flow_rate_cfs
 - diameter_ft
@@ -66,7 +66,9 @@ Manning n: 0.009
 - radius_in
 - area_sf
 - volume_cuft
-- hydraulic_radius_in
+- velocity_fps
+- wetted_perimeter (FUTURE)
+- hydraulic_radius_in (FUTURE)
 
 ## Pipe Class Structure
 
@@ -89,16 +91,18 @@ Pipe
 │   ├── c_factor
 │   ├── roughness_ft
 │   ├── manning_n
-│   └── wall_thickness_in
+│   └── wall_thickness_in (FUTURE)
 │
 └── Properties
     ├── flow_rate_cfs
+    ├── wetted_perimeter_ft (FUTURE)
     ├── diameter_ft
     ├── length_miles
     ├── radius_in
     ├── area_sf
     ├── volume_cuft
-    └── hydraulic_radius_in
+    ├── velocity_cfs    
+    └── hydraulic_radius_in (FUTURE)
 ```
 ## Summary
 The Pipe class serves as the foundational model for
@@ -111,3 +115,13 @@ By separating pipe data from hydraulic calculations,
 the class promotes modular design and supports future
 expansion into force main analysis, lift station
 design, system curves, and other hydraulic workflows.
+
+
+## Notes
+Hydraulic radius intentionally omitted from Pipe class.
+
+Hydraulic radius is dependent on flow geometry
+and wetted perimeter. Future implementations
+within Manning or gravity flow analysis modules
+will calculate hydraulic radius based on actual
+flow conditions rather than assuming full-pipe flow.
