@@ -24,6 +24,28 @@ it supplies validated pipe data to equation and calculator classes.
 - _validate_data()
 - _lookup_material_properties()
 - summary()
+- __str__()
+- __repr__()
+
+### summary()
+Summary will be more robust than __str__() and __repr__().  It will summarize the pipe object physical and hydraulic 
+properties.
+
+For example:
+```text
+Pipe Summary
+------------
+Material: PVC
+Flow Rate: 5.50 gpm
+Diameter: 12.0 in
+Length: 1000.0 ft
+
+Hydraulic Properties
+--------------------
+C-Factor: 150
+Roughness: 0.000005 ft
+Manning n: 0.009
+```
 
 ## Pipe Class Attributes
 
@@ -32,7 +54,9 @@ it supplies validated pipe data to equation and calculator classes.
 - length_ft
 - material
 - c_factor
-- wall_thickness_in
+- roughness_ft
+- manning_n
+- wall_thickness_in (FUTURE ATTRIBUTE)
 
 ## Pipe Class Derived Attributes
 
@@ -43,7 +67,6 @@ it supplies validated pipe data to equation and calculator classes.
 - area_sf
 - volume_cuft
 - hydraulic_radius_in
-- roughness
 
 ## Pipe Class Structure
 
@@ -54,6 +77,8 @@ Pipe
 │   ├── __init__()
 │   ├── _validate_data()
 │   ├── _lookup_material_properties()
+│   ├── __str__()
+│   ├── __repr__()
 │   └── summary()
 │
 ├── Attributes
@@ -62,7 +87,8 @@ Pipe
 │   ├── length_ft
 │   ├── material
 │   ├── c_factor
-│   ├── roughness
+│   ├── roughness_ft
+│   ├── manning_n
 │   └── wall_thickness_in
 │
 └── Properties
