@@ -11,6 +11,7 @@ AWWA Manuals
 """
 
 from src.data.pipe_materials import PIPE_MATERIALS
+from src.data import constants
 import math
 
 class Pipe:
@@ -122,7 +123,13 @@ class Pipe:
             f"pipe_material='{self.pipe_material}')"
         )
 
-    def _validate_data(self, flow_rate_gpm, diameter_in, length_ft, pipe_material) -> None:
+    def _validate_data(
+            self,
+            flow_rate_gpm,
+            diameter_in,
+            length_ft,
+            pipe_material
+    ) -> None:
         """
         Validate the engineering data passed.
 
@@ -143,8 +150,6 @@ class Pipe:
             raise ValueError("Length must be greater than zero.")
         if not pipe_material.strip():
             raise ValueError("Pipe material cannot be empty")
-        if not pipe_material:
-            raise ValueError("Pipe material cannot be empty.")
         if pipe_material not in PIPE_MATERIALS:
             raise ValueError(
                 f"Pipe material '{pipe_material}' not found."
@@ -161,12 +166,6 @@ class Pipe:
         self.c_factor = pipe_material_data["c_factor"]
         self.roughness_ft = pipe_material_data["roughness_ft"]
         self.manning_n = pipe_material_data["manning_n"]
-
-    def derived_properties(self) -> None:
-        """Generates derived properties for the pipe."""
-        self.diameter_ft = self.diameter_in / 12
-        self.length_miles = self.length_ft / 5280
-        self.radius_in = self.diameter_in / 2
 
     def summary(self) -> dict:
         """
@@ -195,13 +194,39 @@ class Pipe:
             'radius_in': self.radius_in,
             'area_sf': self.area_sf,
             'volume_cf': self.volume_cf,
+            'flow_rate_cfs': self.flow_rate_cfs,
+            'velocity_fps': self.velocity_fps,
         }
-        summary_results = {
+        summary_properties = {
             'physical_properties': physical_properties,
             'hydraulic_properties': hydraulic_properties,
             'derived_properties': derived_properties
         }
-        return summary_results
+        return summary_properties
+
+    @property
+    def radius_in(self) -> float:
+        """Unit conversion of diameter in inches to radius in inches."""
+        radius_in = self.diameter_in / 2
+        return radius_in
+
+    @property
+    def diameter_ft(self) -> float:
+        """unit conversion from inches to feet of the pipe diameter."""
+        diameter_ft = self.diameter_in / constants.INCHES_PER_FOOT
+        return diameter_ft
+
+    @property
+    def length_miles(self) -> float:
+        """Unit conversion from the length in feet to miles."""
+        length_miles = self.length_ft / constants.FEET_PER_MILE
+        return length_miles
+
+    @property
+    def flow_rate_cfs(self) -> float:
+        """Unit conversion for flow rate from gpm to cfs."""
+        flow_cfs = self.flow_rate_gpm * constants.GPM_TO_CFS
+        return flow_cfs
 
     @property
     def area_sf(self) -> float:
@@ -214,3 +239,9 @@ class Pipe:
         """Calculates the volume of the pipe."""
         volume = math.pi * self.length_ft * self.diameter_ft**2 / 4
         return volume
+
+    @property
+    def velocity_fps(self) -> float:
+        """Calculates the velocity in fps."""
+        velocity_fps = self.flow_rate_cfs / self.area_sf
+        return velocity_fps
