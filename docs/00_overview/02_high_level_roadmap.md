@@ -79,6 +79,19 @@ Examples:
 
 ---
 
+### Phase 1 Build Order
+
+- [x] Pump Class
+- [x] constants.py
+- [x] pipe_materials.py
+- [ ] Fitting Class
+- [ ] fitting_constants.py
+- [ ] Minor Loss Equation Module
+- [ ] Pump Class
+- [ ] Hazen-Williams Equation Module
+- [ ] Friction Loss Calculator
+- [ ] TDH Calculator
+
 # Phase 2 - Equation Modules
 
 Create a dedicated equations package.
