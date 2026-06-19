@@ -10,8 +10,8 @@ Hydraulic Institute Standards
 AWWA Manuals
 """
 
-from src.data.pipe_materials import PIPE_MATERIALS
-from src.data import constants
+from hydraulic_analysis_suite.data.pipe_materials import PIPE_MATERIALS
+from hydraulic_analysis_suite.data import constants
 import math
 
 

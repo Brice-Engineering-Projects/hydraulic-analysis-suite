@@ -13,8 +13,8 @@ The fitting data helper utility provides two capabilities:
 
 | File | Role |
 | ---- | ---- |
-| `src/utils/fitting_data_helper_calcs.py` | Derivation calculations and verification function |
-| `src/data/fittings_data.py` | The fitting database being supported |
+| `src/hydraulic_analysis_suite/utils/fitting_data_helper_calcs.py` | Derivation calculations and verification function |
+| `src/hydraulic_analysis_suite/data/fittings_data.py` | The fitting database being supported |
 
 ---
 
@@ -23,7 +23,7 @@ The fitting data helper utility provides two capabilities:
 From the project root directory:
 
 ```bash
-python -m src.utils.fitting_data_helper_calcs
+uv run python -m hydraulic_analysis_suite.utils.fitting_data_helper_calcs
 ```
 
 No arguments are required. The verification runs automatically when the module is executed directly.
@@ -169,7 +169,7 @@ Run immediately if:
 The `verify_database_values()` function returns `True` if all checks pass and `False` if any fail. It can be called from the test suite:
 
 ```python
-from src.utils.fitting_data_helper_calcs import verify_database_values
+from hydraulic_analysis_suite.utils.fitting_data_helper_calcs import verify_database_values
 
 def test_fittings_database_integrity():
     assert verify_database_values(), (
@@ -215,7 +215,7 @@ The verification does not perform hydraulic calculations — it only confirms th
 
 | Task | How |
 | ---- | --- |
-| Run verification | `python -m src.utils.fitting_data_helper_calcs` |
+| Run verification | `uv run python -m hydraulic_analysis_suite.utils.fitting_data_helper_calcs` |
 | Integrate with tests | Call `verify_database_values()` and assert return value |
 | Respond to FAIL — accidental edit | Restore value in `fittings_data.py` |
 | Respond to FAIL — intentional change | Update `_CRANE_DERIVED_CHECKS` with engineering justification |

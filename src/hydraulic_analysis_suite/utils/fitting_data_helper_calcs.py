@@ -372,11 +372,11 @@ def verify_database_values() -> bool:
 
     Examples
     --------
-    >>> from src.utils.fitting_data_helper_calcs import verify_database_values
+    >>> from hydraulic_analysis_suite.utils.fitting_data_helper_calcs import verify_database_values
     >>> verify_database_values()
     True
     """
-    from src.data.fittings_data import FITTINGS_DATA
+    from hydraulic_analysis_suite.data.fittings_data import FITTINGS_DATA
 
     divider = "-" * 72
     header  = "=" * 72
