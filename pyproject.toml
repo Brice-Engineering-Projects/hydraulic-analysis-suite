@@ -12,3 +12,14 @@ dependencies = [
     "numpy>=2.4.6",
     "pandas>=3.0.3",
 ]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.0",
+]
