@@ -314,9 +314,135 @@ Fittings: 2 × 90° Standard Radius Bend, 1 × Gate Valve (Fully Open)
 
 ---
 
-## Phase 6 — Documentation
+## Phase 6 — Engineering Validation
 
-### 6.1 README
+Engineering validation confirms that calculated results are accurate and consistent with recognized industry tools and references. This phase is distinct from software testing — it verifies that the engineering is correct, not just that the code runs.
+
+### 6.1 Hand Calculation Verification
+
+Hand calculations serve as the primary baseline. Results must match within an acceptable engineering tolerance (≤ 1% for friction loss, ≤ 2% for TDH).
+
+**Scenario A — Basic Friction Loss**
+
+```text
+Flow Rate:  500 gpm
+Pipe:       8-inch PVC (C = 150)
+Length:     1,000 ft
+```
+
+- [ ] Calculate velocity by hand and compare to application output
+- [ ] Calculate Hazen-Williams headloss by hand and compare to application output
+- [ ] Calculate Darcy-Weisbach headloss by hand and compare to application output
+- [ ] Document results in a verification table
+
+**Scenario B — TDH with Minor Losses**
+
+```text
+Flow Rate:  500 gpm
+Pipe:       8-inch PVC (C = 150)
+Length:     1,000 ft
+Static Head: 25 ft
+Fittings:   2 × 90° Standard Radius Bend, 1 × Gate Valve (Fully Open)
+```
+
+- [ ] Calculate minor losses by hand (K × V²/2g for each fitting) and compare to application output
+- [ ] Calculate TDH by hand (static + friction + minor + velocity head) and compare to application output
+- [ ] Document results in a verification table
+
+**Scenario C — Low Flow / Small Diameter**
+
+```text
+Flow Rate:  50 gpm
+Pipe:       4-inch DIP (New)
+Length:     500 ft
+```
+
+- [ ] Verify Hazen-Williams headloss matches hand calculation
+- [ ] Verify Darcy-Weisbach friction factor is reasonable (check against Moody chart)
+- [ ] Document results in a verification table
+
+**Scenario D — High Flow / Large Diameter**
+
+```text
+Flow Rate:  2,500 gpm
+Pipe:       16-inch DIP (New)
+Length:     5,000 ft
+```
+
+- [ ] Verify Hazen-Williams headloss matches hand calculation
+- [ ] Verify velocity is within a typical design range (2–8 fps)
+- [ ] Document results in a verification table
+
+---
+
+### 6.2 Comparison Against EPA Reference Spreadsheets
+
+The EPA publishes hydraulic design tools and technical guidance used in water and wastewater engineering practice.
+
+- [ ] Identify a relevant EPA friction loss or hydraulic design spreadsheet (e.g., from the EPA SWMM documentation or WaterSense technical resources)
+- [ ] Run the same input scenario through the EPA tool and the application
+- [ ] Record both results side-by-side
+- [ ] Document any discrepancies and identify root cause (formula variation, unit difference, assumption difference)
+- [ ] Confirm results agree within acceptable engineering tolerance
+
+---
+
+### 6.3 Comparison Against Bentley WaterGEMS or WaterCAD
+
+WaterGEMS and WaterCAD are industry-standard hydraulic modeling platforms used in water distribution and force main design. Matching output from these tools demonstrates that the application produces credible engineering results.
+
+- [ ] Set up an equivalent pipe segment in WaterGEMS or WaterCAD matching a verification scenario
+- [ ] Run steady-state hydraulic analysis
+- [ ] Record headloss, velocity, and pressure results from WaterGEMS/WaterCAD
+- [ ] Run the same scenario through the application
+- [ ] Compare results in a side-by-side table
+- [ ] Document any discrepancies and identify root cause
+- [ ] Confirm Hazen-Williams results agree within acceptable engineering tolerance
+- [ ] Confirm Darcy-Weisbach results agree within acceptable engineering tolerance
+
+---
+
+### 6.4 Comparison Against Utility Design Examples
+
+Utility design standards and engineering manuals often include worked examples that can serve as independent validation benchmarks.
+
+- [ ] Identify at least one worked example from a recognized reference:
+  - Pumping Station Design (3rd Edition) — Sanks et al.
+  - AWWA M11, M23, or M41 design examples
+  - Hydraulic Institute Engineering Data Book
+  - Cameron Hydraulic Data worked examples
+  - WEF Manual of Practice No. 8 or MOP 11
+- [ ] Reproduce the worked example inputs in the application
+- [ ] Compare application output to the published solution
+- [ ] Document the reference, inputs, expected output, and actual output
+- [ ] Note any formula or assumption differences between the reference and the application
+
+---
+
+### 6.5 Validation Documentation
+
+All validation results must be captured and stored for traceability.
+
+- [ ] Create a `docs/06_validation/` directory
+- [ ] Create `docs/06_validation/00_validation_summary.md` with:
+  - Summary table of all validation scenarios
+  - Pass/Fail status for each comparison
+  - Reference sources used
+  - Acceptable tolerance criteria
+- [ ] Create one validation record per scenario (e.g., `01_hand_calc_scenario_a.md`)
+  - Input parameters
+  - Expected result (from reference)
+  - Application result
+  - Difference (absolute and percent)
+  - Pass/Fail determination
+  - Notes on any assumptions or discrepancies
+- [ ] Update the validation summary table after each scenario is completed
+
+---
+
+## Phase 7 — Documentation
+
+### 7.1 README
 
 - [ ] Update `README.md` to reflect current project state
 - [ ] Add installation instructions
@@ -324,7 +450,7 @@ Fittings: 2 × 90° Standard Radius Bend, 1 × Gate Valve (Fully Open)
 - [ ] List all currently supported pipe materials
 - [ ] List all currently supported fittings
 
-### 6.2 Inline Documentation
+### 7.2 Inline Documentation
 
 - [ ] Confirm all public functions in equation modules have docstrings
 - [ ] Confirm all public classes in model modules have docstrings
@@ -339,7 +465,10 @@ The MVP is complete when all of the following are true:
 - [ ] A user can run the application from the command line
 - [ ] The application accepts pipe material, dimensions, flow rate, static head, and fittings as inputs
 - [ ] The application calculates and displays velocity, friction headloss (both methods), minor losses, and TDH
-- [ ] All calculations have been verified against hand calculations
+- [ ] All calculations have been verified against hand calculations (Phase 6.1)
+- [ ] Results have been compared against at least one industry tool (WaterGEMS or EPA reference) (Phase 6.2–6.3)
+- [ ] At least one utility design example has been reproduced and validated (Phase 6.4)
+- [ ] Validation records have been documented in `docs/06_validation/` (Phase 6.5)
 - [ ] All unit tests pass
 - [ ] No empty module files remain
 
