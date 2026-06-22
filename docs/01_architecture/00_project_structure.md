@@ -1,14 +1,14 @@
 # Project Structure
 
 ```plaintext
-pipe_hydraulic_calculator
+hydraulic_analysis_suite
 │
 ├── docs/
 │   ├── 00_overview/
 │   ├── 01_structure/
 │   └── 02_strategy/
 │
-├── src/
+├── src/hydraulic_analysis_suite
 │   │
 │   ├── models/
 │   │   ├── __init__
@@ -45,10 +45,14 @@ pipe_hydraulic_calculator
 │       └── menu.py
 │
 ├── tests/
-│   ├── test_pipe.py
-│   ├── test_hazen_williams.py
-│   ├── test_minor_losses.py
-│   └── test_system_curve.py
+│   ├── data/
+│   │   ├── test_fittings_data.py
+│   │   └── test_pipe_materials.py
+│   ├── models/
+│   │   ├── test_fitting.py
+│   │   └── test_pipe.py
+│   └── utils/
+│       └── test_fitting_data_helper_calcs.py
 │
 ├── .gitignore
 ├── main.py

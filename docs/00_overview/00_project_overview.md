@@ -179,7 +179,8 @@ Potential future improvements include:
 * Wet well storage calculations
 * Pump cycling analysis
 * Runtime estimates
-* Generator sizing support
+* Generator sizing 
+* Pipe restraint calculations
 * Export reports to PDF
 * Streamlit web interface
 * Engineering calculation package

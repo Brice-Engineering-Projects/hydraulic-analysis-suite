@@ -147,7 +147,7 @@ Key project documentation includes:
 For the current project structure, see:
 
 ```text
-docs/01_structure/00_project_structure.md
+docs/01_architecture/00_project_structure.md
 ```
 
 ---
