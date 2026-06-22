@@ -85,7 +85,8 @@ Examples:
 - [x] constants.py
 - [x] pipe_materials.py
 - [ ] Fitting Class
-- [ ] fitting_constants.py
+- [ ] fitting_coefficients.py
+- [x] fittings_data.py
 - [ ] Minor Loss Equation Module
 - [ ] Pump Class
 - [ ] Hazen-Williams Equation Module
